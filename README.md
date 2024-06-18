@@ -12,6 +12,7 @@ chmod +x DonkeySimLinux/donkey_sim.x86_64
 # Now to launch the simulator just run
 ./DonkeySimLinux/donkey_sim.x86_64 
 ```
+<br>
 
 - **Conda Environment**: Skip the first two lines if you have already installed conda.
 
@@ -30,8 +31,9 @@ conda install -c conda-forge gym=0.21.0 seaborn=0.11.2 pyyaml=5.4.1 opencv=4.5.5
 pip install gym-donkeycar==1.3.1 stable-baselines3==1.5.0 sb3-contrib==1.5.0 optuna==2.10.0 optuna[stable-baselines3] pyzmq==22.3.0 pygame==2.1.2 imgaug==0.4.0 joblib==1.1.0 tensorboard==2.8.0 protobuf==3.20.0 ipython==7.31.0 pillow==10.3.0
 cd aae-train-donkeycar
 pip install -e .
-
 ```
+<br>
+
 - **Auto Encoder**: Code is given below to collect data for auto encoder and to train it.
 
 ```bash
@@ -44,7 +46,38 @@ python record_data.py -f logs/dataset-mountain -n 10000
 # To train the autoencoder using the data collected
 python -m ae.train_ae --n-epochs 500 --batch-size 8 --z-size 32 -f logs/dataset-mountain/ --verbose 1
 
-# To continue the training
-python -m ae.train_ae --n-epochs 500 --batch-size 8 --z-size 32 -f logs/dataset-mountain/ --verbose 1 -ae logs/ae-32_1716979559_best.pkl
+# To continue the training (use the best version till then in logs folder)
+python -m ae.train_ae --n-epochs 500 --batch-size 8 --z-size 32 -f logs/dataset-mountain/ --verbose 1 -ae logs/<your_best>.pkl
 ```
+<br>
 
+- **Training**: Code is given below to train the agent and analyse the statistics using tensorboard.
+
+```bash
+# Go to sb3 folder
+cd rl-baselines3-zoo
+
+# Start training without tensorboard and modifying parameters
+python train.py --algo tqc --env donkey-mountain-track-v0 --eval-freq -1 --save-freq 25000
+
+# Start training with tensorboard and modifying parameters
+python train.py --algo tqc --env donkey-mountain-track-v0 --eval-freq -1 --save-freq 25000 --save-replay-buffer -tb /tmp/sb3/ -params learning_starts:500
+
+# Continue Training (Use the latest needed version in the command)
+python train.py --algo tqc --env donkey-mountain-track-v0 -i logs/tqc/<your_best>/rl_model_200000_steps.zip -n 25000 --eval-freq -1 --save-freq 25000 --save-replay-buffer -tb /tmp/sb3/ -params learning_starts:500
+
+# Access Tensorboard
+tensorboard --logdir /tmp/sb3/
+```
+<br>
+
+- **Errors**: Few errors while training, if faced, below is a quick fix.
+  
+```bash
+# If any import error occurs with respect to environment copy contents from
+gym_donkeycar/gym_donkeycar/
+
+# to (replace with your profile name)
+/home/<your_profile>/anaconda3/envs/donkey/lib/python3.8/site-packages/gym_donkeycar/
+```
+<br>
