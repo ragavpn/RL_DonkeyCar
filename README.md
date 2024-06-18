@@ -1,5 +1,5 @@
 # RL_DonkeyCar
-A simulation environment for a Reinforcement-Learning Based car
+Train an RL agent in a simulator known as DonkeyCar optimized using an autoencoder for faster training.
 
 ### Setup:
 
