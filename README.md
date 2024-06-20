@@ -29,7 +29,7 @@ conda activate donkey
 conda install pytorch=1.11.0 torchvision torchaudio cudatoolkit=11.3 -c pytorch
 conda install -c conda-forge gym=0.21.0 seaborn=0.11.2 pyyaml=5.4.1 opencv=4.5.5
 pip install gym-donkeycar==1.3.1 stable-baselines3==1.5.0 sb3-contrib==1.5.0 optuna==2.10.0 optuna[stable-baselines3] pyzmq==22.3.0 pygame==2.1.2 imgaug==0.4.0 joblib==1.1.0 tensorboard==2.8.0 protobuf==3.20.0 ipython==7.31.0 pillow==10.3.0
-cd aae-train-donkeycar
+cd Autoencoder
 pip install -e .
 ```
 <br>
@@ -38,7 +38,7 @@ pip install -e .
 
 ```bash
 # Go to the folder
-cd aae-train-donkeycar
+cd Autoencoder
 
 # To collect data, run this and drive around using keys in the simulator for two laps without hitting any edge and resetting the environment
 python record_data.py -f logs/dataset-mountain -n 10000
@@ -55,7 +55,7 @@ python -m ae.train_ae --n-epochs 500 --batch-size 8 --z-size 32 -f logs/dataset-
 
 ```bash
 # Go to sb3 folder
-cd rl-baselines3-zoo
+cd Client
 
 # Start training without tensorboard and modifying parameters
 python train.py --algo tqc --env donkey-mountain-track-v0 --eval-freq -1 --save-freq 25000
@@ -74,9 +74,8 @@ tensorboard --logdir /tmp/sb3/
 - **Errors**: Few errors while training, if faced, below is a quick fix.
   
 ```bash
-# If any import error occurs with respect to environment copy contents from
-gym_donkeycar/gym_donkeycar/
-
+# If any import error(UnregisteredEnv) occurs with respect to environment copy contents from
+./Gym_Donkeycar_env/
 # to (replace with your profile name)
 /home/<your_profile>/anaconda3/envs/donkey/lib/python3.8/site-packages/gym_donkeycar/
 ```
