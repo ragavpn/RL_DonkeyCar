@@ -71,12 +71,39 @@ tensorboard --logdir /tmp/sb3/
 ```
 <br>
 
-- **Errors**: Few errors while training, if faced, below is a quick fix.
+- **Errors**: Few errors while training, if faced, below is a quick fix.<br><br>
+
+**1. UnregisteredEnv**
   
 ```bash
 # If any import error(UnregisteredEnv) occurs with respect to environment copy contents from
 ./Gym_Donkeycar_env/
 # to (replace with your profile name)
 /home/<your_profile>/anaconda3/envs/donkey/lib/python3.8/site-packages/gym_donkeycar/
+```
+<br>
+
+**2. AE_PATH**
+
+```bash
+# AE_PATH is not defined - depending on your shell add it to your path variables
+
+# 1. fish
+nano ~/.config/fish/config.fish
+
+# Add the following line to the end of the file and save it
+set -Ux AE_PATH "<full_path_to_best_pkl_trained_ae>"
+
+# Save the content
+source ~/.config/fish/config.fish
+
+# 2. bash
+nano ~/.bashrc
+
+# Add the following line to the end of the file and save it
+export PATH_NAME="<full_path_to_best_pkl_trained_ae>"
+
+# Save the content
+source ~/.bashrc
 ```
 <br>
