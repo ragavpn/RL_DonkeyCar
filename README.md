@@ -28,9 +28,12 @@ conda create -n donkey python=3.8
 conda activate donkey
 conda install pytorch=1.11.0 torchvision torchaudio cudatoolkit=11.3 -c pytorch
 conda install -c conda-forge gym=0.21.0 seaborn=0.11.2 pyyaml=5.4.1 opencv=4.5.5
-pip install gym-donkeycar==1.3.1 stable-baselines3==1.5.0 sb3-contrib==1.5.0 optuna==2.10.0 optuna[stable-baselines3] pyzmq==22.3.0 pygame==2.1.2 imgaug==0.4.0 joblib==1.1.0 tensorboard==2.8.0 protobuf==3.20.0 ipython==7.31.0 pillow==10.3.0
+pip install stable-baselines3==1.5.0 sb3-contrib==1.5.0 optuna==2.10.0 optuna[stable-baselines3] pyzmq==22.3.0 pygame==2.1.2 imgaug==0.4.0 joblib==1.1.0 tensorboard==2.8.0 protobuf==3.20.0 ipython==7.31.0 pillow==10.3.0
 cd Autoencoder
 pip install -e .
+
+# if gym_donkeycar is not installed still, install using
+pip install git+https://github.com/tawnkramer/gym-donkeycar
 ```
 <br>
 
